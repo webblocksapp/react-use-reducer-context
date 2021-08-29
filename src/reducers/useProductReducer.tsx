@@ -38,28 +38,20 @@ export const useProductReducer = () => {
     return { ...state, error };
   };
 
-  const [data, dispatch] = useReducer<Reducer<ProductReducerState, Action>>(
-    (state, action) => {
-      switch (action.type) {
-        case 'FIND_ALL':
-          return findAll(action.products, state);
-        case 'ADD':
-          return add(action.product, state);
-        case 'REMOVE':
-          return remove(action.id, state);
-        case 'LOADING':
-          return setLoading(action.loading, state);
-        case 'ERROR':
-          return setError(action.error, state);
-        default:
-          return state;
-      }
-    },
-    initialState
-  );
-
-  return {
-    data,
-    dispatch,
-  };
+  return useReducer<Reducer<ProductReducerState, Action>>((state, action) => {
+    switch (action.type) {
+      case 'FIND_ALL':
+        return findAll(action.products, state);
+      case 'ADD':
+        return add(action.product, state);
+      case 'REMOVE':
+        return remove(action.id, state);
+      case 'LOADING':
+        return setLoading(action.loading, state);
+      case 'ERROR':
+        return setError(action.error, state);
+      default:
+        return state;
+    }
+  }, initialState);
 };

@@ -4,7 +4,7 @@ import { Product } from '../interfaces';
 import { UseProductRepository } from '../app-types';
 
 export const useProductRepository = (): UseProductRepository => {
-  const { data: state, dispatch } = useProductReducer();
+  const [state, dispatch] = useProductReducer();
   const { create, findAll } = useProductApi();
 
   const fetchAll = async () => {
