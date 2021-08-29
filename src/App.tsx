@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Screen1 from './screens/Screen1';
+import Screen2 from './screens/Screen2';
+import StoreProvider from './store/StoreProvider';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider>
+      <Router>
+        <header>
+          <Link to="/">Screen 1</Link>
+          &nbsp;&nbsp;&nbsp;
+          <Link to="/screen-2">Screen 2</Link>
+        </header>
+        <hr />
+        <Route exact path="/" component={Screen1} />
+        <Route path="/screen-2" component={Screen2} />
+      </Router>
+    </StoreProvider>
   );
-}
+};
 
 export default App;
