@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { Product } from '../interfaces';
 
-const baseApi = 'http://localhost:4000';
+const baseApi = process.env.REACT_APP_BASE_API;
 
-const useProductApi = () => {
+export const useProductApi = () => {
   const findAll = (): Promise<AxiosResponse<Product[]>> => {
     return axios.get(`${baseApi}/products`);
   };
@@ -18,5 +18,3 @@ const useProductApi = () => {
 
   return { findAll, create, remove };
 };
-
-export default useProductApi;

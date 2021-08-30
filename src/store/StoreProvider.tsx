@@ -7,9 +7,7 @@ const StoreProvider: React.FC = ({ children }) => {
     ...useProductRepository(),
   };
 
-  return (
-    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
-  );
+  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
 };
 
 export default StoreProvider;
