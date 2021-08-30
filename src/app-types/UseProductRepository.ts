@@ -3,9 +3,9 @@ import { ProductReducerState } from './ProductReducerState';
 
 export type UseProductRepository = {
   productRepository: {
-    fetchAll: () => Promise<void>;
-    fetchAllWithDiscount: () => Promise<void>;
-    add: (product: Product) => Promise<void>;
+    findAll: () => Promise<void>;
+    findAllWithDiscount: () => Promise<void>;
+    create: (product: Product) => Promise<void>;
     state: ProductReducerState;
   };
 };

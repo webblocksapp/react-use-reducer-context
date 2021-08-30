@@ -9,7 +9,7 @@ const ProductsHasDiscount: React.FC = () => {
   const { state } = productRepository;
 
   const initOnMounted = () => {
-    productRepository.fetchAllWithDiscount();
+    productRepository.findAllWithDiscount();
   };
 
   useEffect(() => {
