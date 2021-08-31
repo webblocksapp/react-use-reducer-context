@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard';
 import Typography from '@material-ui/core/Typography';
 import StoreContext, { StoreContextType } from '../store/StoreContext';
 import { randomProduct } from '../utils/functions';
+import ProductCardSkeleton from '../components/ProductCardSkeleton';
 
 const Products: React.FC = () => {
   const { productRepository } = useContext<StoreContextType>(StoreContext);
@@ -21,7 +22,7 @@ const Products: React.FC = () => {
 
   return (
     <>
-      {state.loading ? (
+      {state.findingAll ? (
         <Typography component="p" variant="h6">
           Loading...
         </Typography>
@@ -32,6 +33,11 @@ const Products: React.FC = () => {
               <ProductCard product={product} />
             </Grid>
           ))}
+          {state.adding && (
+            <Grid item sm={4}>
+              <ProductCardSkeleton />
+            </Grid>
+          )}
         </Grid>
       )}
       <Box mt={2}>

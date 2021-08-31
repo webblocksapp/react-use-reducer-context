@@ -21,9 +21,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Typography color="textSecondary" variant="h6" component="p" gutterBottom>
           ${product.price}
         </Typography>
-        {product.discountPercentage ? (
+        {product.discount ? (
           <Typography color="secondary" variant="body2" component="p" gutterBottom>
-            {product.discountPercentage}% of discount
+            {product.discount.percentage}% of discount
           </Typography>
         ) : (
           <></>

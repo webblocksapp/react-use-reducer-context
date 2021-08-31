@@ -1,11 +1,11 @@
 import { Product } from '../interfaces';
-import { ProductReducerState } from './ProductReducerState';
+import { ProductState } from './ProductState';
 
 export type UseProductRepository = {
   productRepository: {
-    findAll: () => Promise<void>;
-    findAllWithDiscount: () => Promise<void>;
-    create: (product: Product) => Promise<void>;
-    state: ProductReducerState;
+    findAll: () => Promise<Product[]>;
+    findAllWithDiscount: () => Promise<Product[]>;
+    create: (product: Product) => Promise<Product>;
+    state: ProductState;
   };
 };

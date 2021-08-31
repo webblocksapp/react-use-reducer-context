@@ -1,2 +1,2 @@
 export * from './useProductApi';
-export * from './useProductHasDiscountApi';
+export * from './useProductDiscountApi';

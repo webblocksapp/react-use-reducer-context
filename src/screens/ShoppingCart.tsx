@@ -18,7 +18,7 @@ const ShoppingCart: React.FC = () => {
 
   return (
     <>
-      {state.loading ? (
+      {state.findingAll ? (
         <Typography component="p" variant="h6">
           Loading...
         </Typography>

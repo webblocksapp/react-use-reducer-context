@@ -1,7 +1,7 @@
 import { createContext } from 'react';
-import { UseProductRepository } from '../app-types';
+import { UseProductDiscountRepository, UseProductRepository } from '../app-types';
 
-export type StoreContextType = UseProductRepository;
+export type StoreContextType = UseProductRepository & UseProductDiscountRepository;
 
 const context = createContext({} as any);
 const StoreContext = context;
