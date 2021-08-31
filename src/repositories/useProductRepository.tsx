@@ -1,74 +1,72 @@
-import { useProductApi } from '../apis';
+import { useProductApi, useProductDiscountApi } from '../apis';
 import { useProductReducer } from '../reducers';
 import { Product } from '../interfaces';
 import { UseProductRepository } from '../app-types';
-import { useProductDiscountRepository } from './useProductDiscountRepository';
 
 export const useProductRepository = (): UseProductRepository => {
   const [state, dispatch] = useProductReducer();
   const productApi = useProductApi();
-  const { productDiscountRepository } = useProductDiscountRepository();
+  const productDiscountApi = useProductDiscountApi();
 
   const findAll = async () => {
-    let products: Product[] = [];
-
     try {
       dispatch({ type: 'FINDING_ALL', findingAll: true });
-      products = (await productApi.findAll()).data;
+      const products = (await productApi.findAll()).data;
       dispatch({ type: 'FIND_ALL', products });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
     } finally {
       dispatch({ type: 'FINDING_ALL', findingAll: false });
     }
-
-    return products;
   };
 
   const findAllWithDiscount = async () => {
-    let productsWithDiscounts: Product[] = [];
-
     try {
       dispatch({ type: 'FINDING_ALL_WITH_DISCOUNT', findingAllWithDiscount: true });
-      const products = await findAll();
-      const productsDiscounts = await productDiscountRepository.findAll();
-
-      productsWithDiscounts = products.map((product) => {
-        const foundProductDiscount = productsDiscounts.find(
-          (productDiscount) => productDiscount.productId === product.id
-        );
-
-        if (foundProductDiscount) {
-          product.discount = foundProductDiscount;
-        }
-
-        return product;
-      });
-
-      dispatch({ type: 'FIND_ALL_WITH_DISCOUNT', productsWithDiscounts });
+      const products = (await productApi.findAll()).data;
+      const productsDiscounts = (await productDiscountApi.findAll()).data;
+      dispatch({ type: 'FIND_ALL_WITH_DISCOUNT', products, productsDiscounts });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
     } finally {
       dispatch({ type: 'FINDING_ALL_WITH_DISCOUNT', findingAllWithDiscount: false });
     }
-
-    return productsWithDiscounts;
   };
 
   const create = async (product: Product) => {
-    let createdProduct: Product = product;
-
     try {
       dispatch({ type: 'ADDING', adding: true });
-      createdProduct = (await productApi.create(product)).data;
+      const createdProduct = (await productApi.create(product)).data;
       dispatch({ type: 'ADD', product: createdProduct });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
     } finally {
       dispatch({ type: 'ADDING', adding: false });
     }
+  };
 
-    return createdProduct;
+  const update = async (id: number, product: Product) => {
+    try {
+      dispatch({ type: 'UPDATING', updating: true });
+      const updatedProduct = (await productApi.update(id, product)).data;
+      dispatch({ type: 'UPDATE', id, product: updatedProduct });
+    } catch (error) {
+      dispatch({ type: 'ERROR', error: 'An error ocurred' });
+    } finally {
+      dispatch({ type: 'UPDATING', updating: false });
+    }
+  };
+
+  const remove = async (id: number) => {
+    try {
+      dispatch({ type: 'REMOVING', removing: true });
+      await productApi.remove(id);
+      dispatch({ type: 'REMOVE', id });
+    } catch (error) {
+      dispatch({ type: 'ERROR', error: 'An error ocurred' });
+    } finally {
+      dispatch({ type: 'REMOVING', removing: false });
+    }
   };
 
   return {
@@ -76,6 +74,8 @@ export const useProductRepository = (): UseProductRepository => {
       findAll,
       findAllWithDiscount,
       create,
+      update,
+      remove,
       state,
     },
   };

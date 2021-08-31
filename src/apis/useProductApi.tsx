@@ -12,9 +12,13 @@ export const useProductApi = () => {
     return axios.post(`${baseApi}/products`, product);
   };
 
+  const update = (id: number, product: Product): Promise<AxiosResponse<Product>> => {
+    return axios.put(`${baseApi}/products/${id}`, product);
+  };
+
   const remove = (id: number): Promise<AxiosResponse<Product>> => {
     return axios.delete(`${baseApi}/products/${id}`);
   };
 
-  return { findAll, create, remove };
+  return { findAll, create, update, remove };
 };

@@ -3,9 +3,11 @@ import { ProductState } from './ProductState';
 
 export type UseProductRepository = {
   productRepository: {
-    findAll: () => Promise<Product[]>;
-    findAllWithDiscount: () => Promise<Product[]>;
-    create: (product: Product) => Promise<Product>;
+    findAll: () => Promise<void>;
+    findAllWithDiscount: () => Promise<void>;
+    create: (product: Product) => Promise<void>;
+    update: (id: number, product: Product) => Promise<void>;
+    remove: (id: number) => Promise<void>;
     state: ProductState;
   };
 };

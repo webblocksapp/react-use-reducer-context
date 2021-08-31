@@ -1,108 +1,91 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Cheese",
-      "price": 2.5,
-      "location": "Refrigerated foods"
+      "name": "Handmade Metal Mouse",
+      "location": "Sleek",
+      "price": 646,
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Crisps",
-      "price": 3,
-      "location": "the Snack isle"
+      "name": "Tasty Plastic Computer",
+      "location": "Handmade",
+      "price": 788,
+      "id": 4
     },
     {
-      "id": 3,
-      "name": "Pizza",
-      "price": 4,
-      "location": "Refrigerated foods"
+      "name": "Gorgeous Rubber Ball",
+      "location": "Refined",
+      "price": 108,
+      "id": 5
     },
     {
-      "id": 4,
-      "name": "Chocolate",
-      "price": 1.5,
-      "location": "The Snack isle"
+      "name": "Awesome Steel Pants",
+      "location": "Licensed",
+      "price": 51,
+      "id": 6
     },
     {
-      "id": 5,
-      "name": "Self-raising flour",
-      "price": 1.5,
-      "location": "Home baking"
+      "name": "Handcrafted Fresh Car",
+      "location": "Handmade",
+      "price": 511,
+      "id": 52296
     },
     {
-      "id": 6,
-      "name": "Ground almonds",
-      "price": 3,
-      "location": "Home baking"
-    },
-    {
-      "id": 41292,
-      "name": "Ergonomic Concrete Tuna",
-      "location": "Incredible",
-      "price": 660
-    },
-    {
-      "id": 39110,
-      "name": "Tasty Granite Bacon",
+      "name": "Handcrafted Frozen Pants",
       "location": "Fantastic",
-      "price": 503
+      "price": 817,
+      "id": 65480
     },
     {
-      "id": 64662,
-      "name": "Intelligent Rubber Pants",
-      "location": "Handmade",
-      "price": 697
+      "name": "Incredible Granite Tuna",
+      "location": "Licensed",
+      "price": 65,
+      "id": 72614
     },
     {
-      "id": 52296,
-      "name": "Practical Concrete Tuna",
-      "location": "Handcrafted",
-      "price": 42
-    },
-    {
-      "id": 65480,
-      "name": "Gorgeous Steel Salad",
-      "location": "Handmade",
-      "price": 586
-    },
-    {
-      "id": 72614,
-      "name": "Ergonomic Wooden Shirt",
+      "name": "Sleek Wooden Towels",
       "location": "Rustic",
-      "price": 106
+      "price": 178,
+      "id": 71998
     },
     {
-      "id": 71998,
-      "name": "Fantastic Plastic Shirt",
+      "name": "Awesome Rubber Soap",
       "location": "Ergonomic",
-      "price": 239
+      "price": 652,
+      "id": 92383
     },
     {
-      "id": 92383,
-      "name": "Rustic Wooden Car",
-      "location": "Handmade",
-      "price": 404
+      "id": 71832,
+      "name": "Handmade Frozen Chicken",
+      "location": "Handcrafted",
+      "price": 986
     },
     {
-      "id": 90222,
-      "name": "Incredible Concrete Bacon",
-      "location": "Gorgeous",
-      "price": 190
+      "id": 60822,
+      "name": "Refined Fresh Computer",
+      "location": "Handcrafted",
+      "price": 396
     },
     {
-      "id": 77917,
-      "name": "Fantastic Cotton Chair",
-      "location": "Gorgeous",
-      "price": 849
+      "id": 56035,
+      "name": "Awesome Soft Chicken",
+      "location": "Ergonomic",
+      "price": 352
+    },
+    {
+      "id": 81823,
+      "name": "Practical Soft Soap",
+      "location": "Handcrafted",
+      "price": 694
+    },
+    {
+      "id": 62196,
+      "name": "Unbranded Metal Chicken",
+      "location": "Refined",
+      "price": 132
     }
   ],
   "products-discounts": [
-    {
-      "id": 1,
-      "productId": 3,
-      "percentage": 10
-    },
     {
       "id": 2,
       "productId": 5,

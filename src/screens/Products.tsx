@@ -29,12 +29,12 @@ const Products: React.FC = () => {
       ) : (
         <Grid container spacing={2}>
           {state.products.map((product) => (
-            <Grid key={product.id} item sm={4}>
+            <Grid key={product.id} item xs={12} sm={4}>
               <ProductCard product={product} />
             </Grid>
           ))}
           {state.adding && (
-            <Grid item sm={4}>
+            <Grid item xs={12} sm={4}>
               <ProductCardSkeleton />
             </Grid>
           )}

@@ -1,11 +1,12 @@
 import { Reducer, useReducer } from 'react';
 import { ProductState } from '../app-types';
-import { Product } from '../interfaces';
+import { Product, ProductDiscount } from '../interfaces';
 
 type Action =
   | { type: 'FIND_ALL'; products: Product[] }
-  | { type: 'FIND_ALL_WITH_DISCOUNT'; productsWithDiscounts: Product[] }
+  | { type: 'FIND_ALL_WITH_DISCOUNT'; products: Product[]; productsDiscounts: ProductDiscount[] }
   | { type: 'ADD'; product: Product }
+  | { type: 'UPDATE'; id: number; product: Product }
   | { type: 'REMOVE'; id: number }
   | { type: 'FINDING_ALL'; findingAll: boolean }
   | { type: 'FINDING_ALL_WITH_DISCOUNT'; findingAllWithDiscount: boolean }
@@ -16,7 +17,6 @@ type Action =
 
 const initialState: ProductState = {
   products: [],
-  productsWithDiscounts: [],
   findingAll: false,
   findingAllWithDiscount: false,
   adding: false,
@@ -30,12 +30,37 @@ export const useProductReducer = () => {
     return { ...state, products };
   };
 
-  const findAllWithDiscount = (productsWithDiscounts: Product[], state: ProductState) => {
-    return { ...state, productsWithDiscounts };
+  const findAllWithDiscount = (products: Product[], productsDiscounts: ProductDiscount[], state: ProductState) => {
+    const productsWithDiscounts = products.map((product) => {
+      const foundProductDiscount = productsDiscounts.find(
+        (productDiscount) => productDiscount.productId === product.id
+      );
+
+      if (foundProductDiscount) {
+        product.discount = foundProductDiscount;
+      }
+
+      return product;
+    });
+
+    return { ...state, products: productsWithDiscounts };
   };
 
   const add = (product: Product, state: ProductState) => {
     const products = [...state.products, product];
+    return { ...state, products, error: '' };
+  };
+
+  const update = (id: number, product: Product, state: ProductState) => {
+    let products = [...state.products];
+    products = products.map((item) => {
+      if (item.id === id) {
+        return { ...item, ...product };
+      }
+
+      return item;
+    });
+
     return { ...state, products, error: '' };
   };
 
@@ -73,9 +98,11 @@ export const useProductReducer = () => {
       case 'FIND_ALL':
         return findAll(action.products, state);
       case 'FIND_ALL_WITH_DISCOUNT':
-        return findAllWithDiscount(action.productsWithDiscounts, state);
+        return findAllWithDiscount(action.products, action.productsDiscounts, state);
       case 'ADD':
         return add(action.product, state);
+      case 'UPDATE':
+        return update(action.id, action.product, state);
       case 'REMOVE':
         return remove(action.id, state);
       case 'FINDING_ALL':

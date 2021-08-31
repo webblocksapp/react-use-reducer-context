@@ -24,8 +24,8 @@ const ProductsWithDiscount: React.FC = () => {
         </Typography>
       ) : (
         <Grid container spacing={2}>
-          {state.productsWithDiscounts.map((product) => (
-            <Grid key={product.id} item sm={4}>
+          {state.products.map((product) => (
+            <Grid key={product.id} item xs={12} sm={4}>
               <ProductCard product={product} />
             </Grid>
           ))}
