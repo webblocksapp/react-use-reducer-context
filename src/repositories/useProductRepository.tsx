@@ -1,12 +1,13 @@
 import { useProductApi, useProductHasDiscountApi } from '../apis';
-import { useProductReducer } from '../reducers';
 import { Product } from '../interfaces';
-import { UseProductRepository } from '../app-types';
+import { RootState, UseProductRepository } from '../app-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const useProductRepository = (): UseProductRepository => {
-  const [state, dispatch] = useProductReducer();
   const productApi = useProductApi();
+  const dispatch = useDispatch();
   const productHasDiscountApi = useProductHasDiscountApi();
+  const state = useSelector((rootState: RootState) => rootState.productsRootState);
 
   const findAll = async () => {
     try {

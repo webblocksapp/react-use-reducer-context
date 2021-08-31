@@ -1,11 +1,11 @@
 import Grid from '@material-ui/core/Grid';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import Typography from '@material-ui/core/Typography';
-import StoreContext, { StoreContextType } from '../store/StoreContext';
+import { useProductRepository } from '../repositories';
 
 const ShoppingCart: React.FC = () => {
-  const { productRepository } = useContext<StoreContextType>(StoreContext);
+  const { productRepository } = useProductRepository();
   const { state } = productRepository;
 
   const initOnMounted = () => {

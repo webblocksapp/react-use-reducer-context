@@ -1,13 +1,12 @@
 import React from 'react';
-import { useProductRepository } from '../repositories';
-import StoreContext from './StoreContext';
+import { Provider } from 'react-redux';
+import { combineReducers, createStore } from 'redux';
+import { useProductReducer } from '../reducers';
 
 const StoreProvider: React.FC = ({ children }) => {
-  const store = {
-    ...useProductRepository(),
-  };
+  const store = createStore(combineReducers({ productsRootState: useProductReducer() }));
 
-  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
+  return <Provider store={store}>{children}</Provider>;
 };
 
 export default StoreProvider;

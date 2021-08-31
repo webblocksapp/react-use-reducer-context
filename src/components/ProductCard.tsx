@@ -9,6 +9,8 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  console.log(1);
+
   return (
     <Card variant="outlined">
       <CardContent>

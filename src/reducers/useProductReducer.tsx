@@ -1,4 +1,3 @@
-import { Reducer, useReducer } from 'react';
 import { ProductReducerState } from '../app-types';
 import { Product } from '../interfaces';
 
@@ -15,7 +14,7 @@ const initialState: ProductReducerState = {
   error: '',
 };
 
-export const useProductReducer = () => {
+export const useProductReducer = (): ((state: ProductReducerState, action: Action) => ProductReducerState) => {
   const findAll = (products: Product[], state: ProductReducerState) => {
     return { ...state, products };
   };
@@ -38,7 +37,7 @@ export const useProductReducer = () => {
     return { ...state, error };
   };
 
-  return useReducer<Reducer<ProductReducerState, Action>>((state, action) => {
+  return (state: ProductReducerState = initialState, action: Action) => {
     switch (action.type) {
       case 'FIND_ALL':
         return findAll(action.products, state);
@@ -53,5 +52,5 @@ export const useProductReducer = () => {
       default:
         return state;
     }
-  }, initialState);
+  };
 };
