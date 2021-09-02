@@ -1,7 +1,8 @@
 import { useProductApi, useProductDiscountApi } from '../apis';
 import { useProductReducer } from '../reducers';
-import { Product } from '../interfaces';
+import { Product, ProductDiscount } from '../interfaces';
 import { UseProductRepository } from '../app-types';
+import { getResponseData } from '../utils/functions';
 
 export const useProductRepository = (): UseProductRepository => {
   const [state, dispatch] = useProductReducer();
@@ -11,7 +12,7 @@ export const useProductRepository = (): UseProductRepository => {
   const findAll = async () => {
     try {
       dispatch({ type: 'FINDING_ALL', findingAll: true });
-      const products = (await productApi.findAll()).data;
+      const products = await getResponseData<Product[]>(productApi.findAll());
       dispatch({ type: 'FIND_ALL', products });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
@@ -23,8 +24,10 @@ export const useProductRepository = (): UseProductRepository => {
   const findAllWithDiscount = async () => {
     try {
       dispatch({ type: 'FINDING_ALL_WITH_DISCOUNT', findingAllWithDiscount: true });
-      const products = (await productApi.findAll()).data;
-      const productsDiscounts = (await productDiscountApi.findAll()).data;
+      const [products, productsDiscounts] = await getResponseData<[Product[], ProductDiscount[]]>([
+        productApi.findAll(),
+        productDiscountApi.findAll(),
+      ]);
       dispatch({ type: 'FIND_ALL_WITH_DISCOUNT', products, productsDiscounts });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
@@ -36,7 +39,7 @@ export const useProductRepository = (): UseProductRepository => {
   const create = async (product: Product) => {
     try {
       dispatch({ type: 'ADDING', adding: true });
-      const createdProduct = (await productApi.create(product)).data;
+      const createdProduct = await getResponseData<Product>(productApi.create(product));
       dispatch({ type: 'ADD', product: createdProduct });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
@@ -48,7 +51,7 @@ export const useProductRepository = (): UseProductRepository => {
   const update = async (id: number, product: Product) => {
     try {
       dispatch({ type: 'UPDATING', updating: true });
-      const updatedProduct = (await productApi.update(id, product)).data;
+      const updatedProduct = await getResponseData<Product>(productApi.update(id, product));
       dispatch({ type: 'UPDATE', id, product: updatedProduct });
     } catch (error) {
       dispatch({ type: 'ERROR', error: 'An error ocurred' });
